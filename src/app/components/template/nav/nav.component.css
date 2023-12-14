@@ -1,0 +1,13 @@
+.container {
+    height: 85%;
+}
+
+i {
+    padding-right: .5rem;
+}
+
+.link-text {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
