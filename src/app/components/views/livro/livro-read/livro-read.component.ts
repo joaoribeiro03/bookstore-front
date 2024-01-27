@@ -1,16 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Livro } from "../livro.model";
 import { LivroService } from "../livro.service";
 
 @Component({
-  selector: 'app-livro-delete',
-  templateUrl: './livro-delete.component.html',
-  styleUrl: './livro-delete.component.css'
+  selector: 'app-livro-read',
+  templateUrl: './livro-read.component.html',
+  styleUrl: './livro-read.component.css'
 })
-export class LivroDeleteComponent implements OnInit {
-
+export class LivroReadComponent implements OnInit {
   id_cat: String = "";
 
   livro: Livro = {
@@ -19,10 +17,6 @@ export class LivroDeleteComponent implements OnInit {
     nomeAutor: "",
     texto: "",
   }
-
-  titulo = new FormControl("", [Validators.minLength(3)]);
-  nomeAutor = new FormControl("", [Validators.minLength(3)]);
-  texto = new FormControl("", [Validators.minLength(10)]);
 
   constructor(
     private service: LivroService,
@@ -53,16 +47,6 @@ export class LivroDeleteComponent implements OnInit {
   findById(): void {
     this.service.findById(this.livro.id!).subscribe((resposta) => {
       this.livro = resposta
-    })
-  }
-
-  delete(): void {
-    this.service.delete(this.livro.id!).subscribe(() => {
-      this.router.navigate([`categorias/${this.id_cat}/livros`]);
-      this.service.mensagem("Livro deletado com sucesso!")
-    }, err => {
-      this.router.navigate([`categorias/${this.id_cat}/livros`]);
-      this.service.mensagem("Falha ao deletar livro! tente mais tarde.")
     })
   }
 }
